@@ -1,5 +1,5 @@
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? '/api' 
+  ? process.env.REACT_APP_API_URL || '/api'
   : '/api'; // In development, use proxy configured in package.json
 
 // Helper function to get auth token
@@ -46,13 +46,15 @@ const apiRequest = async (endpoint, options = {}) => {
     // Check if response is ok first
     if (!response.ok) {
       // Try to parse JSON, but handle cases where response is not JSON
-      let errorMessage = 'API request failed';
+      let errorMessage = `API request failed with status ${response.status}`;
       try {
         const errorData = await response.json();
         errorMessage = errorData.message || errorMessage;
+        console.error('API response error:', errorData);
       } catch (jsonError) {
         // If JSON parsing fails, use status text
         errorMessage = response.statusText || errorMessage;
+        console.error('API response error (non-JSON):', response.statusText);
       }
       throw new Error(errorMessage);
     }

@@ -1,9 +1,10 @@
 // Get the base API URL depending on environment
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? process.env.REACT_APP_API_URL || '' // Empty string for same-origin requests on Vercel
-  : '/api'; // In development, use proxy configured in package.json
+  ? '' // Empty string for same-origin requests on Vercel
+  : ''; // In development, use proxy configured in package.json
 
 console.log('API_BASE_URL:', API_BASE_URL);
+console.log('NODE_ENV:', process.env.NODE_ENV);
 
 // Helper function to get auth token
 const getAuthToken = () => {
@@ -38,9 +39,9 @@ const apiRequest = async (endpoint, options = {}) => {
       ? (options.headers || {}) // Don't include Content-Type for FormData
       : getHeaders();
     
-    // Make sure endpoint starts with /api in production
+    // Make sure endpoint starts with /api
     let finalEndpoint = endpoint;
-    if (process.env.NODE_ENV === 'production' && !endpoint.startsWith('/api/')) {
+    if (!endpoint.startsWith('/api/')) {
       finalEndpoint = `/api${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
     }
     

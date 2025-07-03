@@ -2,21 +2,19 @@
   "version": 2,
   "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/build",
+  "functions": {
+    "api/**/*.js": {
+      "maxDuration": 10
+    }
+  },
   "rewrites": [
     {
-      "source": "/api/auth/login",
-      "destination": "/server/api/auth/login.js"
-    },
-    {
       "source": "/api/(.*)",
-      "destination": "/server/api/index.js"
+      "destination": "/api/$1"
     },
     {
       "source": "/(.*)",
       "destination": "/index.html"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }

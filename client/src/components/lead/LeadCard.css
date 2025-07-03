@@ -1,0 +1,170 @@
+.lead-card {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 5px solid #ff7f00;
+  position: relative;
+}
+
+.lead-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.lead-info h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.lead-info p {
+  margin: 0;
+  color: #888;
+}
+
+.lead-status-container {
+    display: flex;
+    align-items: center;
+}
+
+.lead-status {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ff7f00;
+  border: 3px solid #ff7f00;
+  font-weight: bold;
+}
+
+.lead-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lead-date {
+  display: flex;
+  align-items: center;
+  color: #888;
+}
+
+.calendar-icon {
+  margin-right: 5px;
+  /* Add calendar icon styles */
+}
+
+.lead-actions {
+  display: flex;
+  align-items: center;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 10px;
+  position: relative;
+}
+
+.copy-icon::before { content: '📄'; }
+.pen-icon::before { content: '🖊️'; }
+.clock-icon::before { content: '🕔'; }
+.arrow-down-icon::before { content: '⌄'; }
+
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  z-index: 10;
+  width: 200px;
+}
+
+.type-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.type-menu p {
+    margin: 0 0 10px 0;
+    font-weight: bold;
+}
+
+.type-option {
+    border: none;
+    padding: 8px 15px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+}
+.type-option.hot { background-color: #ff4d4d; }
+.type-option.warm { background-color: #ffcc00; }
+.type-option.cold { background-color: #33ccff; }
+
+.date-menu, .status-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-menu label, .status-menu label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.date-menu input, .status-menu input {
+    margin-bottom: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.save-btn {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.status-info {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.status-info span {
+    font-weight: bold;
+    margin-right: 10px;
+    border: 1px solid;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+.status-info p {
+    margin: 0;
+    font-size: 12px;
+} 

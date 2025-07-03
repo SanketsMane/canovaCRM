@@ -1,0 +1,21 @@
+.stats-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.profile-role {
+    color: #888;
+    font-size: 14px;
+    margin: 0;
+}
+
+.profile-label {
+    margin: 20px 0 10px 0;
+    color: #888;
+    font-size: 14px;
+}
+
+@media (max-width: 768px) {
+/* ... existing code ... */
+} 

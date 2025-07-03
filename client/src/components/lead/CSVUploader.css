@@ -1,0 +1,144 @@
+.csv-uploader {
+  text-align: center;
+}
+
+.uploader-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  text-align: left;
+  color: #3b82f6;
+}
+
+.uploader-subtitle {
+  color: #6b7280;
+  margin: 0 0 25px 0;
+  text-align: left;
+}
+
+/* Initial Step Styles */
+.drop-zone {
+  border: 2px dashed #e0e0e0;
+  border-radius: 8px;
+  padding: 40px 20px;
+  margin-bottom: 20px;
+}
+
+.browse-link {
+    color: #007bff;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+/* Uploading Step Styles */
+.uploading-view {
+    padding: 40px 0;
+}
+.uploading-view p {
+    margin: 16px 0;
+    font-weight: 500;
+    font-size: 16px;
+}
+.uploading-view .btn-secondary {
+    margin-top: 15px;
+}
+
+/* Confirmation Step Styles */
+.file-item-lg {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f7f8fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+.confirmation-text {
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+
+/* General Action Buttons */
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+    margin-left: 10px;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.modal-actions .btn-primary {
+    background-color: #212529;
+    color: #fff;
+    border: 1px solid #212529;
+}
+.modal-actions .btn-primary:disabled {
+    background-color: #aaa;
+    border-color: #aaa;
+    cursor: not-allowed;
+}
+
+.modal-actions .btn-secondary {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #f0f0f0;
+}
+
+/* Completed Step Styles */
+.completed-view {
+  text-align: center;
+  padding: 20px;
+}
+
+.success-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.completed-view h3 {
+  color: #16a34a;
+  margin: 0 0 20px 0;
+  font-size: 24px;
+}
+
+.upload-summary {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.upload-summary p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.error-list {
+  margin-top: 12px;
+}
+
+.error-list ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.error-item {
+  color: #dc2626;
+  font-size: 12px;
+  margin: 4px 0;
+}

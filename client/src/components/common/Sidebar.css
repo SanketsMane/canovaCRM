@@ -1,0 +1,190 @@
+.sidebar {
+    width: 250px;
+    background-color: #f4f4f4;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+.sidebar-header {
+    margin-bottom: 30px;
+}
+
+.sidebar-header h2 {
+    font-weight: bold;
+    text-align: center;
+}
+
+.canova-text {
+    color: #6b7280; /* Gray color for the "Canova" part */
+}
+
+.crm-text {
+    color: #007bff; /* Blue color for the "CRM" part */
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1;
+}
+
+.sidebar-menu li {
+    margin-bottom: 15px;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: #555;
+    display: block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover {
+    background-color: #f3f4f6; /* Lighter gray for hover state */
+    color: #4b5563; /* Darker gray for text on hover */
+}
+
+.sidebar-menu a.active {
+    background-color: #6b7280; /* Changed from blue to gray */
+    color: white;
+    font-weight: 500;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.sidebar-logout-btn {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: #6b7280; /* Changed to gray */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.sidebar-logout-btn:hover {
+    background-color: #4b5563; /* Darker gray on hover */
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(75, 85, 99, 0.3);
+}
+
+.logout-icon {
+    font-size: 16px;
+}
+
+.logout-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #d0d0d0;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #007bff;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.profile-info {
+    line-height: 1.3;
+    flex-grow: 1;
+}
+
+.profile-name {
+    font-weight: bold;
+    margin: 0 0 2px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.profile-email {
+    color: #666;
+    font-size: 12px;
+    margin: 0 0 2px 0;
+    word-break: break-word;
+}
+
+.profile-role {
+    color: #888;
+    font-size: 12px;
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.profile-label {
+    margin: 20px 0 10px 0;
+    color: #888;
+    font-size: 14px;
+}
+
+.profile-section {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.profile-section:hover {
+    background-color: #e8e8e8;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+        border-bottom: 1px solid #E9EDF2;
+    }
+
+    .sidebar-menu {
+        display: flex;
+        justify-content: space-around;
+        flex-grow: 0;
+    }
+
+    .sidebar-bottom {
+        display: none;
+    }
+} 

@@ -1,0 +1,30 @@
+.progress-container {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-text {
+  position: absolute;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+.progress-background,
+.progress-bar {
+  fill: transparent;
+}
+
+.progress-background {
+  stroke: #e6e6e6;
+}
+
+.progress-bar {
+  stroke: #000;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  transition: stroke-dashoffset 0.35s;
+} 

@@ -1,0 +1,49 @@
+.leads-list-table-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 20px;
+}
+
+.leads-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.leads-table th, .leads-table td {
+    padding: 16px;
+}
+
+.leads-table thead tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.leads-table th {
+    font-weight: 500;
+    color: #8c8c8c;
+    font-size: 14px;
+}
+
+.leads-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.leads-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.leads-table td {
+    font-size: 14px;
+    color: #333;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+    color: #8c8c8c;
+} 

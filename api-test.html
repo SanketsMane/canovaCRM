@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        button { padding: 10px 15px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 3px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>CRM API Test Page</h1>
+    <p>This page tests the API endpoints to verify everything is working correctly.</p>
+    
+    <div class="test-section">
+        <h3>1. Test Login API</h3>
+        <button onclick="testLogin()">Test Login</button>
+        <div id="loginResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. Test Signup API</h3>
+        <button onclick="testSignup()">Test Signup</button>
+        <div id="signupResult"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. Test CORS</h3>
+        <button onclick="testCORS()">Test CORS</button>
+        <div id="corsResult"></div>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:5001/api';
+        
+        function displayResult(elementId, success, message, data = null) {
+            const element = document.getElementById(elementId);
+            element.className = success ? 'success' : 'error';
+            element.innerHTML = `
+                <p><strong>${success ? '✅ Success' : '❌ Error'}</strong>: ${message}</p>
+                ${data ? `<pre>${JSON.stringify(data, null, 2)}</pre>` : ''}
+            `;
+        }
+        
+        async function testLogin() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'olivia.williams@canovacrm.com',
+                        password: 'admin123'
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayResult('loginResult', true, 'Login successful', {
+                        user: data.data.employee.fullName,
+                        role: data.data.employee.role,
+                        tokenLength: data.data.token.length
+                    });
+                } else {
+                    const errorData = await response.json();
+                    displayResult('loginResult', false, `Login failed: ${errorData.message}`);
+                }
+            } catch (error) {
+                displayResult('loginResult', false, `Login error: ${error.message}`);
+            }
+        }
+        
+        async function testSignup() {
+            try {
+                const testEmail = `test.user.${Date.now()}@example.com`;
+                const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstName: 'Test',
+                        lastName: 'User',
+                        email: testEmail,
+                        password: 'password123',
+                        location: 'Test City',
+                        phone: '1234567890',
+                        department: 'Testing',
+                        role: 'employee'
+                    })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    displayResult('signupResult', true, 'Signup successful', {
+                        user: data.data.employee.fullName,
+                        email: data.data.employee.email,
+                        role: data.data.employee.role
+                    });
+                } else {
+                    const errorData = await response.json();
+                    displayResult('signupResult', false, `Signup failed: ${errorData.message}`);
+                }
+            } catch (error) {
+                displayResult('signupResult', false, `Signup error: ${error.message}`);
+            }
+        }
+        
+        async function testCORS() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'OPTIONS'
+                });
+                
+                const corsHeaders = {
+                    'Access-Control-Allow-Origin': response.headers.get('Access-Control-Allow-Origin'),
+                    'Access-Control-Allow-Methods': response.headers.get('Access-Control-Allow-Methods'),
+                    'Access-Control-Allow-Headers': response.headers.get('Access-Control-Allow-Headers')
+                };
+                
+                displayResult('corsResult', true, 'CORS headers retrieved', corsHeaders);
+            } catch (error) {
+                displayResult('corsResult', false, `CORS test error: ${error.message}`);
+            }
+        }
+    </script>
+</body>
+</html>

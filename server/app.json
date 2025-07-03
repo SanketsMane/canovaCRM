@@ -1,0 +1,22 @@
+{
+  "name": "CanovaCRM API",
+  "description": "A comprehensive CRM system API with MongoDB Atlas",
+  "repository": "https://github.com/yourusername/canova-crm",
+  "logo": "https://cdn.iconscout.com/icon/free/png-256/crm-1-482395.png",
+  "keywords": ["crm", "mongodb", "express", "node"],
+  "env": {
+    "MONGO_URI": {
+      "description": "MongoDB Atlas connection string",
+      "value": "mongodb+srv://username:password@cluster0.xxxxx.mongodb.net/dbname?retryWrites=true&w=majority"
+    },
+    "JWT_SECRET": {
+      "description": "Secret key for JWT token generation",
+      "generator": "secret"
+    },
+    "NODE_ENV": {
+      "description": "Node environment",
+      "value": "production"
+    }
+  },
+  "addons": []
+}

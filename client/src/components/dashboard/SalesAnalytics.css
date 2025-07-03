@@ -1,0 +1,45 @@
+/* SalesAnalytics styles matching the provided design */
+.sales-analytics {
+  padding: 24px;
+  border-radius: 8px;
+}
+
+.sales-analytics h2 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: #e5e7eb;
+  stroke-dasharray: 2 2;
+}
+
+.recharts-tooltip-wrapper .custom-tooltip {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  border: 1px solid #e5e7eb;
+}
+
+.custom-tooltip .label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.custom-tooltip .sales {
+  color: #6b7280;
+}
+
+.recharts-text {
+  font-size: 12px;
+  fill: #9ca3af;
+}
+
+.recharts-xAxis .recharts-cartesian-axis-tick-value {
+  font-size: 11px;
+} 

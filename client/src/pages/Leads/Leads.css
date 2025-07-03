@@ -1,0 +1,60 @@
+.leads-page {
+    padding: 20px 30px;
+}
+
+.leads-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.breadcrumbs {
+    color: #555;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.add-leads-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #3b82f6;
+    color: white;
+}
+
+.add-leads-btn:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .leads-page {
+        padding: 16px 20px;
+    }
+    
+    .leads-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .header-actions {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    .add-leads-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+}

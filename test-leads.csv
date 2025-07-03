@@ -1,0 +1,4 @@
+name,email,phone,company,source,status,type,location,preferredLanguage,notes,value,currency,tags
+John Smith,john.smith@testcompany.com,+15551234567,Test Company Inc,Website,open,warm,New York,English,Interested in our premium package,15000,USD,"premium,corporate"
+Jane Doe,jane.doe@example.com,+15559876543,Example Corp,Referral,contacted,hot,San Francisco,English,High-value prospect from partner,25000,USD,"enterprise,urgent"
+Bob Johnson,bob.johnson@startup.com,+15555555555,Startup Solutions,Social Media,open,cold,Austin,English,Early stage company looking for solutions,5000,USD,"startup,tech"

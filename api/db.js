@@ -1,42 +1,45 @@
 const mongoose = require('mongoose');
 
-let isConnected = false;
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
 const connectToDatabase = async () => {
-  if (isConnected && mongoose.connection.readyState === 1) {
-    console.log('Using existing database connection');
-    return;
+  if (cached.conn) {
+    console.log('Using cached database connection');
+    return cached.conn;
   }
 
-  try {
-    console.log('Connecting to MongoDB...');
+  if (!cached.promise) {
+    console.log('Creating new database connection...');
     console.log('MONGO_URI exists:', !!process.env.MONGO_URI);
+    console.log('Mongoose version:', mongoose.version);
     
     if (!process.env.MONGO_URI) {
       throw new Error('MONGO_URI environment variable is not set');
     }
 
-    // Disconnect if there's an existing connection in a bad state
-    if (mongoose.connection.readyState !== 0) {
-      await mongoose.disconnect();
-    }
-
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      bufferCommands: false, // Disable mongoose buffering
-      bufferMaxEntries: 0, // Disable mongoose buffering
+    const opts = {
+      bufferCommands: false, // Disable mongoose buffering for serverless
       maxPoolSize: 10, // Maintain up to 10 socket connections
       serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
       socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-      family: 4 // Use IPv4, skip trying IPv6
+    };
+
+    cached.promise = mongoose.connect(process.env.MONGO_URI, opts).then((mongoose) => {
+      console.log('Connected to MongoDB successfully');
+      return mongoose;
     });
-    
-    isConnected = true;
-    console.log('Connected to MongoDB successfully');
+  }
+
+  try {
+    cached.conn = await cached.promise;
+    return cached.conn;
   } catch (error) {
     console.error('MongoDB connection error:', error);
-    isConnected = false;
+    cached.promise = null;
     throw error;
   }
 };

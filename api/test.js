@@ -11,29 +11,33 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
+  let dbStatus = 'Not tested';
+  let dbError = null;
+
   try {
     // Test database connection
     await connectToDatabase();
-    
-    return res.status(200).json({
-      success: true,
-      message: 'CRM API is working',
-      method: req.method,
-      timestamp: new Date().toISOString(),
-      database: 'Connected',
-      environment: {
-        hasMongoUri: !!process.env.MONGO_URI,
-        hasJwtSecret: !!process.env.JWT_SECRET,
-        nodeEnv: process.env.NODE_ENV
-      }
-    });
+    dbStatus = 'Connected successfully';
+    console.log('Database connection test passed');
   } catch (error) {
-    console.error('Test endpoint error:', error);
-    return res.status(500).json({
-      success: false,
-      message: 'API test failed',
-      error: error.message,
-      timestamp: new Date().toISOString()
-    });
+    dbStatus = 'Connection failed';
+    dbError = error.message;
+    console.error('Database connection test failed:', error);
   }
+    
+  return res.status(200).json({
+    success: true,
+    message: 'CRM API is working',
+    method: req.method,
+    timestamp: new Date().toISOString(),
+    database: {
+      status: dbStatus,
+      error: dbError
+    },
+    environment: {
+      hasMongoUri: !!process.env.MONGO_URI,
+      hasJwtSecret: !!process.env.JWT_SECRET,
+      nodeEnv: process.env.NODE_ENV
+    }
+  });
 }

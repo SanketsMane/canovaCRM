@@ -1,5 +1,5 @@
-const connectToDatabase = require('./db');
-const User = require('../server/models/User');
+const connectToDatabase = require('../db');
+const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 
 // Generate JWT token
@@ -32,10 +32,19 @@ export default async function handler(req, res) {
   }
 
   try {
+    console.log('Login attempt started');
+    console.log('Environment check:', {
+      hasMongoUri: !!process.env.MONGO_URI,
+      hasJwtSecret: !!process.env.JWT_SECRET,
+      nodeEnv: process.env.NODE_ENV
+    });
+
     // Connect to database
     await connectToDatabase();
+    console.log('Database connected successfully');
 
     const { email, password } = req.body;
+    console.log('Login attempt for email:', email);
 
     // Validate input
     if (!email || !password) {
@@ -47,6 +56,8 @@ export default async function handler(req, res) {
 
     // Find user by email
     const user = await User.findOne({ email });
+    console.log('User found:', !!user);
+    
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -64,6 +75,8 @@ export default async function handler(req, res) {
 
     // Verify password
     const isPasswordValid = await user.comparePassword(password);
+    console.log('Password valid:', isPasswordValid);
+    
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
@@ -94,11 +107,17 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('Login error details:', {
+      message: error.message,
+      stack: error.stack,
+      name: error.name
+    });
+    
     return res.status(500).json({
       success: false,
       message: 'Server error during login',
-      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error',
+      details: process.env.NODE_ENV === 'development' ? error.stack : undefined
     });
   }
 }

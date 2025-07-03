@@ -1,4 +1,6 @@
-export default function handler(req, res) {
+const connectToDatabase = require('./db');
+
+export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -9,10 +11,29 @@ export default function handler(req, res) {
     return res.status(200).end();
   }
 
-  return res.status(200).json({
-    success: true,
-    message: 'CRM API is working',
-    method: req.method,
-    timestamp: new Date().toISOString()
-  });
+  try {
+    // Test database connection
+    await connectToDatabase();
+    
+    return res.status(200).json({
+      success: true,
+      message: 'CRM API is working',
+      method: req.method,
+      timestamp: new Date().toISOString(),
+      database: 'Connected',
+      environment: {
+        hasMongoUri: !!process.env.MONGO_URI,
+        hasJwtSecret: !!process.env.JWT_SECRET,
+        nodeEnv: process.env.NODE_ENV
+      }
+    });
+  } catch (error) {
+    console.error('Test endpoint error:', error);
+    return res.status(500).json({
+      success: false,
+      message: 'API test failed',
+      error: error.message,
+      timestamp: new Date().toISOString()
+    });
+  }
 }

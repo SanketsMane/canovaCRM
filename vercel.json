@@ -1,11 +1,15 @@
 {
   "version": 2,
-  "buildCommand": "cd client && npm install && npm run build && cd ../server && npm install",
+  "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/build",
   "rewrites": [
     {
+      "source": "/api/auth/login",
+      "destination": "/server/api/auth/login.js"
+    },
+    {
       "source": "/api/(.*)",
-      "destination": "/api/$1"
+      "destination": "/server/api/index.js"
     },
     {
       "source": "/(.*)",

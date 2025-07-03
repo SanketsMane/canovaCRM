@@ -7,11 +7,11 @@ require('dotenv').config();
 const app = express();
 
 // Import routes
-const authRoutes = require('./routes/auth');
-const employeeRoutes = require('./routes/employees');
-const leadRoutes = require('./routes/leads');
-const dashboardRoutes = require('./routes/dashboard');
-const breakRoutes = require('./routes/breaks');
+const authRoutes = require('../routes/auth');
+const employeeRoutes = require('../routes/employees');
+const leadRoutes = require('../routes/leads');
+const dashboardRoutes = require('../routes/dashboard');
+const breakRoutes = require('../routes/breaks');
 
 // CORS middleware - allow all origins in production
 app.use(cors({

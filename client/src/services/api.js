@@ -1,6 +1,9 @@
+// Get the base API URL depending on environment
 const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? process.env.REACT_APP_API_URL || '/api'
+  ? process.env.REACT_APP_API_URL || '' // Empty string for same-origin requests on Vercel
   : '/api'; // In development, use proxy configured in package.json
+
+console.log('API_BASE_URL:', API_BASE_URL);
 
 // Helper function to get auth token
 const getAuthToken = () => {
@@ -34,8 +37,16 @@ const apiRequest = async (endpoint, options = {}) => {
     const headers = isFormData 
       ? (options.headers || {}) // Don't include Content-Type for FormData
       : getHeaders();
-
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    
+    // Make sure endpoint starts with /api in production
+    let finalEndpoint = endpoint;
+    if (process.env.NODE_ENV === 'production' && !endpoint.startsWith('/api/')) {
+      finalEndpoint = `/api${endpoint.startsWith('/') ? endpoint : '/' + endpoint}`;
+    }
+    
+    console.log(`Making API request to: ${API_BASE_URL}${finalEndpoint}`);
+    
+    const response = await fetch(`${API_BASE_URL}${finalEndpoint}`, {
       ...options,
       headers: {
         ...headers,
@@ -83,12 +94,19 @@ const apiRequest = async (endpoint, options = {}) => {
 // Authentication API
 export const authAPI = {
   login: async (email, password) => {
-    const data = await apiRequest('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password })
-    });
-    setAuthToken(data.data.token);
-    return data.data.user;
+    try {
+      console.log('Attempting login for:', email);
+      const data = await apiRequest('/auth/login', {
+        method: 'POST',
+        body: JSON.stringify({ email, password })
+      });
+      console.log('Login response:', data);
+      setAuthToken(data.data.token);
+      return data.data.user;
+    } catch (error) {
+      console.error('Login failed:', error);
+      throw error;
+    }
   },
 
   signup: async (signupData) => {
